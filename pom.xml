@@ -1,0 +1,89 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>learn.semantic.kernal.s.m</groupId>
+  <artifactId>demo</artifactId>
+  <version>1.0.0-snapshot</version>
+  <packaging>jar</packaging>
+
+  <name>semantic-kernel-java-demo</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <semantic.kernel.version>0.2.13-alpha</semantic.kernel.version>
+    <semantic.kernel.extension.version>0.2.7-alpha</semantic.kernel.extension.version>
+    <maven.compiler.release>17</maven.compiler.release>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- https://mvnrepository.com/artifact/com.microsoft.semantic-kernel/semantickernel-bom -->
+      <!-- all core dependencies are present here -->
+      <dependency>
+        <groupId>com.microsoft.semantic-kernel</groupId>
+        <artifactId>semantickernel-bom</artifactId>
+        <version>${semantic.kernel.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+       </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>1.4.12</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.4.12</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.azure/azure-ai-openai -->
+    <dependency>
+      <groupId>com.azure</groupId>
+      <artifactId>azure-ai-openai</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.microsoft.semantic-kernel</groupId>
+      <artifactId>semantickernel-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.microsoft.semantic-kernel</groupId>
+      <artifactId>semantickernel-core</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.microsoft.semantic-kernel</groupId>
+      <artifactId>semantickernel-plugin-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.microsoft.semantic-kernel</groupId>
+      <artifactId>semantickernel-connectors-ai-openai</artifactId>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.microsoft.semantic-kernel.extensions/semantickernel-sequentialplanner-extension -->
+    <dependency>
+      <groupId>com.microsoft.semantic-kernel</groupId>
+      <artifactId>semantickernel-planners</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.microsoft.semantic-kernel</groupId>
+      <artifactId>semantickernel-gpt3-tokenizer</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.microsoft.semantic-kernel.extensions</groupId>
+      <artifactId>semantickernel-sequentialplanner-extension</artifactId>
+      <version>${semantic.kernel.extension.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.microsoft.semantic-kernel.extensions/semantickernel-actionplanner-extension -->
+    <dependency>
+      <groupId>com.microsoft.semantic-kernel.extensions</groupId>
+      <artifactId>semantickernel-actionplanner-extension</artifactId>
+      <version>${semantic.kernel.extension.version}</version>
+    </dependency>
+  </dependencies>
+</project>
