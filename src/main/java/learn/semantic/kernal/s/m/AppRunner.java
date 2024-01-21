@@ -7,8 +7,13 @@ import com.microsoft.semantickernel.Kernel;
 import com.microsoft.semantickernel.SKBuilders;
 import com.microsoft.semantickernel.planner.actionplanner.Plan;
 import com.microsoft.semantickernel.planner.sequentialplanner.SequentialPlanner;
+import com.microsoft.semantickernel.semanticfunctions.PromptTemplateConfig;
 import com.microsoft.semantickernel.textcompletion.TextCompletion;
 import learn.semantic.kernal.s.m.skill.GreetNativeSkill;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class AppRunner {
     public static void main( String[] args ) {
@@ -24,15 +29,35 @@ public class AppRunner {
                 .build();
 
         Kernel kernel = SKBuilders.kernel().withDefaultAIService(textCompletionService).build();
+
+        var fixedFunction = kernel.
+                getSemanticFunctionBuilder()
+                .withFunctionName("convertToAllCaps")
+                .withDescription("converts input message to all capital")
+                .withPromptTemplate("""
+                        '{{$input}}'
+                        convert the above text into all capital
+                        """.stripIndent())
+                .withSkillName("SemanticSkill")
+                .withCompletionConfig(new PromptTemplateConfig.CompletionConfigBuilder()
+                        .maxTokens(100)
+                        .temperature(0)
+                        .topP(1)
+                        .build())
+                .build();
+
+        kernel.registerSemanticFunction(fixedFunction);
+
         kernel.importSkill(new GreetNativeSkill(), "GreetNativeSkill");
 
         SequentialPlanner planner = new SequentialPlanner(kernel, null, null);
 
-        Plan plan = planner.createPlanAsync("Greet the user when they introduce themselves").block();
+        Plan plan = planner.createPlanAsync(
+                "convert the input to all caps and print it").block();
 
         System.out.println(plan.toPlanString());
 
-        String message = "Hi! My name is Sujal";
+        String message = "Hi! I my username is ss6sujal@gmail.com but please call me Sujal";
         String result = plan.invokeAsync(message).block().getResult();
 
         System.out.println(result);

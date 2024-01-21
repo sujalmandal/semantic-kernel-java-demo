@@ -11,7 +11,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <semantic.kernel.version>0.2.13-alpha</semantic.kernel.version>
+    <semantic.kernel.version>0.2.11-alpha</semantic.kernel.version>
     <semantic.kernel.extension.version>0.2.7-alpha</semantic.kernel.extension.version>
     <maven.compiler.release>17</maven.compiler.release>
   </properties>
